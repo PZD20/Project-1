@@ -4,8 +4,186 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: rgb(225, 225, 225);
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+        .contenedor {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            display: flex;
+            text-align: left;
+            width: 500px;
+            height: auto;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 0px 2px 0px ;
+        }
+        h1 {
+            color: rgb(219, 92, 0);
+            text-align: center;
+        }
+        form {
+            width: 100%;
+        }
+        input[type="text"] {
+            width: 98%;
+            height: 30px;
+            outline: none;
+            margin-bottom:5px;
+        }
+        select {
+            width: 100%;
+            height: 40px;
+            border-radius: 5px;
+            border-color: rgb(216, 216, 216);
+            margin-bottom:5px;
+        }
+        .pre {
+            color: rgb(219, 92, 0);
+        }
+        .linea1 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .com   {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 8px;
+        } 
+        textarea {
+            resize: none;
+            width: 95%;
+            height: 100px;
+            padding: 10px;
+        }
+        button {
+            background-color: rgb(219, 120, 0);
+            color: white;
+            border-radius: 3px;
+            width: 100%;
+            height: 50px;
+            border: none;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        button:hover {
+            background-color: rgba(219, 120, 0, 0.744);
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="contenedor">
+    <form action="">
+        <h1>Pedido de Pizza</h1>
+        <label for="1">Nombre del cliente:</label>
+        <input type="text" id="1">
+        <label for="2">Tamaño de pizza:</label>
+        <select name="" id="2">
+            <option value="">Selecciona un Tamaño</option>
+            <option value="8000">Chica - $8000</option>
+            <option value="12000">Mediana - $12.000 </option>
+            <option value="16000">Grande - $16.000</option>
+            <option value="20000">Familiar - $20.000</option>
+        </select>
+        <p>Ingredientes adicionales:</p>
+        <div class="linea1">
+        <label for="jam"><input type="checkbox" id="jam" value="1500">Jamón</label>
+        <span class="pre">+$1500</span>
+        </div>
+        <div class="linea1">
+        <label for="ace"><input type="checkbox" id="ace" value="800">Aceitunas</label>
+        <span class="pre">+$800</span>
+        </div>
+        <div class="linea1">
+        <label for="cham"><input type="checkbox" id="cham" value ="1200">Champiñones</label>
+        <span class="pre">+$1200</span>
+        </div>
+        <div class="linea1">
+        <label for="cham"><input type="checkbox" id="que" value="1000">Extra de queso</label>
+        <span class="pre">+$1000</span>
+        </div>
+        <div class="tama">
+        <label>Tipo de masa:</label>
+        <div class="linea1">
+        <label for="10"><input type="radio" name="pref" id="10" value="0">Fina</label>
+        <span class="pre">Sin cargo</span></div>
+        <div class="linea1">
+        <label for="11"><input type="radio" name="pref" id="11" value="0">Tradicional</label>
+        <span class="pre">Sin cargo</span></div>
+        <div class="linea1">
+       <label for="12"> <input type="radio" name="pref" id="12" value="2000">Rellena de queso</label>
+        <span class="pre">+$2000</span></div>
+        </div>
+        <div class="com">
+        <p>Comentarios del pedido</p>
+        <textarea name="" id="5" maxlength="200" placeholder="Ej.: sin cebolla, bien cocida..."></textarea>
+        </div>
+        <button onclick="calcular()" type="button">Realizar Pedido</button>
+        <p id="men"></p>
+    </form>
+
+
+
+
+    <script>
+        let n = "";
+        let tamc = ""
+        let tam = 0;
+        let ingad = 0;
+        let mass = 0;
+        let msj = "";
+        let preciot = 0;
+        function calcular(){
+            preciot = 0;
+            tamc = "";
+            tam = 0;
+            ingad = 0;
+            mass = 0;
+            n = document.getElementById("1").value;
+            tamc = document.getElementById("2");
+            tam = parseInt(tamc.options[tamc.selectedIndex].value);
+            console.log(tam);
+            preciot = preciot + tam;
+            console.log(preciot)
+            if (document.getElementById("jam").checked) {
+                ingad = ingad +parseInt( document.getElementById("jam").value);
+            }
+            if (document.getElementById("ace").checked){
+                ingad = ingad +parseInt( document.getElementById("ace").value);
+            }
+            if (document.getElementById("cham").checked){
+                ingad = ingad + parseInt(document.getElementById("cham").value);
+            }
+            if (document.getElementById("que").checked){
+                ingad = ingad + parseInt(document.getElementById("que").value);
+            }
+            console.log(ingad);
+            preciot = preciot + ingad;
+            console.log(preciot);
+            if (document.getElementById("10").checked){
+                mass = mass + parseInt(document.getElementById("10").value);
+            }
+            if (document.getElementById("11").checked){
+                mass = mass + parseInt(document.getElementById("11").value);
+            }
+            if (document.getElementById("12").checked){
+                mass = mass + parseInt(document.getElementById("12").value);
+            }
+            console.log(mass);
+            preciot=preciot+mass;
+            console.log(preciot)
+            document.getElementById("men").innerHTML="Precio Total = $"+preciot;
+        }
+    </script>
+</div>
 </body>
 </html>
